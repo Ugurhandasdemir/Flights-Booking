@@ -68,5 +68,3 @@ THY_3/
 │   │── urls.py          # URL yönlendirmeleri
 │   └── templates/      # HTML şablonları
 ```
-
-Bu adımları takip ederek projeyi başarılı bir şekilde çalıştırabilirsiniz. 🚀
