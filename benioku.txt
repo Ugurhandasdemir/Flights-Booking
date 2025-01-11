@@ -1,0 +1,53 @@
+Veritabanını Yüklemek :
+
+SSMS’yi aç ve SQL Server’a bağlan.
+Object Explorer panelinde Databases üzerine sağ tıkla ve Restore Database… seçeneğini seç.
+Source (Kaynak) kısmında "Device" seçeneğini işaretle ve ... (göz at) butonuna tıkla.
+Add... butonuna bas ve thy_1.bak dosyanın bulunduğu konumu seç.
+OK butonuna tıkla ve "Verify Backup Media" (Yedekleme Medyasını Doğrula) seçeneğini işaretle.
+
+
+
+
+
+
+
+Django Projesini Çalıştırma Kılavuzu
+
+Bu belge, `thy_9` dizini içindeki `thy_3` Django projesinin nasıl çalıştırılacağını açıklar.
+
+### 1. PowerShell ile Proje Klasörüne Git
+PowerShell veya Komut Satırını aç ve aşağıdaki komutları sırayla çalıştır:
+
+```powershell
+cd 220707085_UğurhanDaşdemir
+cd thy_3
+
+### 2. Eğer proje bir sanal ortam (.venv) kullanıyorsa, etkinleştirmek için:
+
+Windows için:
+
+```powershell
+.venv\Scripts\activate
+
+Linux/macOS için:
+```bash
+source .venv/bin/activate
+
+
+### 3. Eğer proje bağımlılıkları eksikse, şu komut ile yükleyebilirsin:
+
+```powershell
+pip install -r requirements.txt
+
+
+### 4.Geliştirme sunucusunu başlatmak için:
+
+```powershell
+python manage.py runserver
+
+### 5.Django projesinin çalıştığını kontrol etmek için tarayıcıdan şu adrese git:
+
+'''Tarayıcı
+http://127.0.0.1:8000/
+
