@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center text-primary mb-4">Koltuk Seçimi</h2>
+
+  {% if messages %}
+    <div class="mb-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="card mb-3 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Seçilen Uçuş</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Kalkış:</strong> {{ ucus.kalıs }}</p>
+      <p><strong>Varış:</strong> {{ ucus.varıs }}</p>
+      <p><strong>Tarih:</strong> {{ ucus.kalkis_saati|date:"d-m-Y H:i" }}</p>
+      <p><strong>Fiyat:</strong> <span class="text-success">{{ ucus.fiyat }} TRY</span></p>
+      <p><strong>Boş Koltuk Sayısı:</strong> <span class="text-danger fw-bold">{{ bos_koltuk_sayisi }}</span></p>
+    </div>
+  </div>
+
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-3">Koltuk Haritası</h5>
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="email" class="form-label">E-posta Adresi</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            class="form-control"
+            placeholder="E-posta adresinizi giriniz"
+            required
+          >
+        </div>
+
+        <div class="text-center">
+          {% for row in seat_map %}
+          <div class="d-flex justify-content-center mb-2">
+            {% for seat in row %}
+            <button
+              type="submit"
+              name="koltuk"
+              value="{{ seat.name }}"
+              class="btn {% if seat.dolu %}btn-danger{% else %}btn-light border{% endif %} me-1 px-3"
+              {% if seat.dolu %}disabled{% endif %}
+            >
+              {{ seat.name }}
+            </button>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <span class="badge bg-danger">Dolu</span>
+        <span class="badge bg-light text-dark border">Boş</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

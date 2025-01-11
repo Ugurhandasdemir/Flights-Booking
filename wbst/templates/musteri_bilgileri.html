@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center text-primary mb-4">Müşteri Bilgileri</h2>
+
+  {% if messages %}
+    <div class="mb-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!--  seçilen uçuş bilgilerini göster -->
+  {% if ucus %}
+  <div class="card shadow mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Seçilen Uçuş</h5>
+    </div>
+    <div class="card-body">
+      <p class="mb-1"><strong>ID:</strong> {{ ucus.ucus_id }}</p>
+      <p class="mb-1"><strong>Kalkış:</strong> {{ ucus.kalıs }}</p>
+      <p class="mb-1"><strong>Varış:</strong> {{ ucus.varıs }}</p>
+      <p class="mb-1"><strong>Tarih:</strong> {{ ucus.kalkis_saati|date:"d-m-Y H:i" }}</p>
+      <p class="mb-0"><strong>Fiyat:</strong> <span class="text-success">{{ ucus.fiyat }} TRY</span></p>
+    </div>
+  </div>
+  {% endif %}
+
+  <form method="POST" action="{% url 'musteri_bilgisi_kaydet' ucus.ucus_id %}" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="isim" class="form-label">İsim</label>
+        <input type="text" name="isim" id="isim" class="form-control" placeholder="Adınızı giriniz" required>
+        <div class="invalid-feedback">Lütfen isminizi girin.</div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="soyisim" class="form-label">Soyisim</label>
+        <input type="text" name="soyisim" id="soyisim" class="form-control" placeholder="Soyadınızı giriniz" required>
+        <div class="invalid-feedback">Lütfen soyadınızı girin.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="telefon" class="form-label">Telefon</label>
+        <input type="text" name="telefon" id="telefon" class="form-control" placeholder="Telefon numaranızı giriniz">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="email" class="form-label">E-posta</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="E-posta adresinizi giriniz" required>
+        <div class="invalid-feedback">Lütfen geçerli bir e-posta adresi girin.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="dogum_tarihi" class="form-label">Doğum Tarihi</label>
+        <input type="date" name="dogum_tarihi" id="dogum_tarihi" class="form-control" required>
+        <div class="invalid-feedback">Lütfen doğum tarihinizi girin.</div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Cinsiyet</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="cinsiyet" id="erkek" value="True" checked>
+            <label class="form-check-label" for="erkek">Erkek</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="cinsiyet" id="kadin" value="False">
+            <label class="form-check-label" for="kadin">Kadın</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Kaydet</button>
+    </div>
+  </form>
+</div>
+
+{% if messages %}
+  <div class="mb-3">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<script>
+  // Form validation
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    // form doğru mu kontorl et
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
+{% endblock %}

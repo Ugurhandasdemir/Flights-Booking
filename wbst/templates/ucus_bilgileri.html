@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body class="bg-light">
+<header class="bg-dark py-5"
+        style="background: url('{% static 'images/flight-results-banner.jpg' %}')
+               no-repeat center center;
+               background-size: cover;
+               height: 50vh;">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Uçuş Bilgileri</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Seçtiğiniz uçuşları inceleyin</p>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Uçuş Sonuçları</h2>
+    {% if ucuslar %}
+        <div class="row">
+            {% for ucus in ucuslar %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">{{ ucus.kalıs }} → {{ ucus.varıs }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Tarih:</strong> {{ ucus.kalkis_saati|date:"d-m-Y H:i" }}</p>
+                            <p><strong>Uçuş Süresi:</strong> {{ ucus.ucus_suresi }}</p>
+                            <p><strong>Uçak Tipi:</strong> {{ ucus.ucak_tipi }}</p>
+                            <p><strong>Fiyat:</strong> {{ ucus.fiyat }} TRY</p>
+                            <a href="/bilet-al/{{ ucus.ucus_id }}/" class="btn btn-outline-primary">Bilet Al</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            Seçilen kriterlere uygun uçuş bulunamadı.
+        </div>
+    {% endif %}
+</div>
+</body>
+{% endblock %}

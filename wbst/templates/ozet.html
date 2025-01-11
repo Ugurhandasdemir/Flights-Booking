@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="text-center">Ödenmiş Bilet Özeti</h2>
+
+    {% if bilet_detaylari %}
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title">Bilet Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Bilet No:</strong> {{ bilet_detaylari.1 }}</p>
+                <p><strong>Koltuk:</strong> {{ bilet_detaylari.2 }}</p>
+                <p><strong>Durum:</strong> {{ bilet_detaylari.3 }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title">Müşteri Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>İsim Soyisim:</strong> {{ bilet_detaylari.4 }} {{ bilet_detaylari.5 }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title">Uçuş Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Kalkış:</strong> {{ bilet_detaylari.6 }}</p>
+                <p><strong>Varış:</strong> {{ bilet_detaylari.7 }}</p>
+                <p><strong>Kalkış Saati:</strong> {{ bilet_detaylari.8 }}</p>
+                <p><strong>Uçuş Süresi:</strong> {{ ucus_suresi }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header bg-warning text-white">
+                <h5 class="card-title">Ödeme Bilgileri</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Ödeme Tutarı:</strong> {{ bilet_detaylari.9 }} TRY</p>
+            </div>
+        </div>
+
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <div class="d-grid mt-4">
+        <a href="{% url 'home' %}" class="btn btn-primary">Ana Sayfaya Dön</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<body class="bg-light">
+  <!-- ANA BANNER / HEADER -->
+  <header class="bg-dark py-5"
+          style="background: url('{% static 'images/erzurum-grand-mosque-erzurum-ulu-camii.jpg' %}')
+                 no-repeat center center;
+                 background-size: cover;
+                 height: 50vh;">
+      <div class="container px-4 px-lg-5 my-5">
+          <div class="text-center text-white">
+              <h1 class="display-4 fw-bolder">UgoAirlines</h1>
+              <p class="lead fw-normal text-white-50 mb-0">Uçmanın En Kötü Yolu</p>
+          </div>
+      </div>
+  </header>
+
+  <div class="container mt-5">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <!-- uçu arama -->
+      <h2 class="mb-4">Uçuş Arama</h2>
+      <form id="flightSearchForm" method="POST" action="{% url 'ucus_bilgileri' %}">
+          {% csrf_token %}
+          <div class="row">
+              <div class="col-md-6">
+                  <label class="form-label">Kalkış</label>
+                  <select id="from" class="form-select" name="from" required>
+                      <option value="">Kalkış Noktası Seçin</option>
+                  </select>
+              </div>
+              <div class="col-md-6">
+                  <label class="form-label">Varış</label>
+                  <select id="to" class="form-select" name="to" required>
+                      <option value="">Varış Noktası Seçin</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row mt-3">
+              <div class="col-md-6">
+                  <label class="form-label">Gidiş Tarihi</label>
+                  <input type="date" id="departureDate" class="form-control" name="departure_date" required>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Uçuşları Ara</button>
+      </form>
+  </div>
+
+  <!-- bilet sorgula -->
+  <div class="container mt-5">
+      <hr>
+      <h2>Bilet Sorgulama</h2>
+      <form method="POST" action="{% url 'bilet_sorgulama' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+              <label for="bilet_no" class="form-label">Bilet Numarası</label>
+              <input type="text" name="bilet_no" id="bilet_no" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Sorgula</button>
+      </form>
+
+      <!-- bilet sonucu-->
+      {% if bilet_bilgisi %}
+          <div class="card mt-3">
+              <div class="card-header bg-info text-white">Bilet Detayı</div>
+              <div class="card-body">
+                  <p><strong>Bilet No:</strong> {{ bilet_bilgisi.bilet_no }}</p>
+                  <p><strong>Durum:</strong> {{ bilet_bilgisi.durum }}</p>
+                  <p><strong>Koltuk:</strong> {{ bilet_bilgisi.koltuk }}</p>
+                  <p><strong>Uçuş:</strong> {{ bilet_bilgisi.ucus.kalıs }} → {{ bilet_bilgisi.ucus.varıs }}</p>
+                  {% if bilet_bilgisi.musteri %}
+                    <p><strong>Müşteri:</strong>
+                       {{ bilet_bilgisi.musteri.isim }} {{ bilet_bilgisi.musteri.soyisim }}
+                    </p>
+                  {% endif %}
+                  <!-- bilet beklemede veya ödendiyse iptal et -->
+                  {% if bilet_bilgisi.durum == 'Beklemede' or bilet_bilgisi.durum == 'Ödendi' %}
+                      <a class="btn btn-danger"
+                         href="{% url 'bilet_iptal' bilet_bilgisi.bilet_id %}">
+                         İptal Et
+                      </a>
+                  {% else %}
+                      <span class="text-muted">
+                        Bu bilet iptal edilemez ({{ bilet_bilgisi.durum }})
+                      </span>
+                  {% endif %}
+              </div>
+          </div>
+      {% endif %}
+  </div>
+
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Kalkış noktalarını çek
+      fetch('/get-kalkis-noktalari/')
+          .then(response => response.json())
+          .then(data => {
+              const fromSelect = document.getElementById('from');
+              data.kalkis_noktalari.forEach(kalkis => {
+                  const option = document.createElement('option');
+                  option.value = kalkis;
+                  option.textContent = kalkis;
+                  fromSelect.appendChild(option);
+              });
+          });
+
+      // Kalkış seçildiğinde varış noktalarını getir
+      document.getElementById('from').addEventListener('change', function () {
+          const fromValue = this.value;
+          const toSelect = document.getElementById('to');
+          toSelect.innerHTML = '<option value="">Varış Noktası Seçin</option>';
+
+          if (fromValue) {
+              fetch(`/get-varis-noktalari/?from=${fromValue}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      data.varis_noktalari.forEach(varis => {
+                          const option = document.createElement('option');
+                          option.value = varis;
+                          option.textContent = varis;
+                          toSelect.appendChild(option);
+                      });
+                  });
+          }
+      });
+  });
+  </script>
+</body>
+{% endblock %}
