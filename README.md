@@ -4,7 +4,7 @@
 
 ![Uçuş Sonuçları](https://user-images.githubusercontent.com/12345678/resim.png)
 
-![Müşteri Bilgileri](https://user-images.githubusercontent.com/12345678/resim.png)
+![Müşteri Bilgileri](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005855.png)
 
 
 
