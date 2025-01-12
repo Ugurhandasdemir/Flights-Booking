@@ -1,5 +1,9 @@
 # THY_3 Django Projesi
 
+![Ana Sayfa](images/Screenshot 2025-01-12 005753.png)
+
+
+
 Bu proje, **THY_3** adlı bir Django web uygulamasıdır. Bu belge, projeyi nasıl kuracağınızı ve çalıştıracağınızı açıklar.
 
 ## Gereksinimler
