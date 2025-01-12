@@ -1,15 +1,14 @@
 # THY_3 Django Projesi
 
-![Ana Sayfa](https://user-images.githubusercontent.com/12345678/resim.png)
-
-![Uçuş Sonuçları](https://user-images.githubusercontent.com/12345678/resim.png)
-
-![Müşteri Bilgileri](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005855.png)
-
-
-
-
 Bu proje, **THY_3** adlı bir Django web uygulamasıdır. Bu belge, projeyi nasıl kuracağınızı ve çalıştıracağınızı açıklar.
+
+![Ana Sayfa](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005753.png)
+
+![Uçuş Sonuçları](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005846.png)
+
+![Müşteri Bilgileri](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005910.png)
+
+![Bilet Seçimi](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005925.png)
 
 ## Gereksinimler
 
