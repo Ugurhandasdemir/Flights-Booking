@@ -1,6 +1,11 @@
 # THY_3 Django Projesi
 
-![Ana Sayfa](images/Screenshot 2025-01-12 005753.png)
+![Ana Sayfa](https://user-images.githubusercontent.com/12345678/resim.png)
+
+![Uçuş Sonuçları](https://user-images.githubusercontent.com/12345678/resim.png)
+
+![Müşteri Bilgileri](https://user-images.githubusercontent.com/12345678/resim.png)
+
 
 
 
