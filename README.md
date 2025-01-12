@@ -6,7 +6,7 @@ Bu proje, **THY_3** adlı bir Django web uygulamasıdır. Bu belge, projeyi nas�
 
 ![Uçuş Sonuçları](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005846.png)
 
-![Müşteri Bilgileri](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005910.png)
+![Müşteri Bilgileri](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005855.png)
 
 ![Bilet Seçimi](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005925.png)
 
