@@ -1,6 +1,6 @@
 # THY_3 Django Projesi
 
-Bu proje, **THY_3** adlı bir Django web uygulamasıdır. Bu belge, projeyi nasıl kuracağınızı ve çalıştıracağınızı açıklar.
+Bu proje, **THY_3** adlı bir Django web uygulamasıdır.
 
 ![Ana Sayfa](https://github.com/Ugurhandasdemir/Flights-Booking/blob/main/images/Screenshot%202025-01-12%20005753.png)
 
